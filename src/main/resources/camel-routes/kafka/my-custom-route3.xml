@@ -1,0 +1,20 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+	<route id="camel-copy-file-route">
+		<description>
+			Read file and copy to destination
+		</description>
+		<from uri="file:C:/temp/" />
+		<split streaming="true">
+			<tokenize token="TollTransactionRecord" xml="true" />
+			<!-- <marshal ref = "xml2jsonmarshller"/> -->
+			<marshal id="_marshal1">
+                <xmljson forceTopLevelObject="true"
+                    removeNamespacePrefixes="true" skipNamespaces="false"
+                    skipWhitespace="true" trimSpaces="true" typeHints="YES"/>
+            </marshal>
+			<log message="sent sucessfully!" />
+			<to uri="file:C:/temp/destination" />
+		</split>
+		<marshal ref="xml2jsonmarshller"/>
+	</route>
+</routes>

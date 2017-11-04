@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes id="routes-e7c81b34-4b91-4802-a0f6-9a04231c4c05" xmlns="http://camel.apache.org/schema/spring">
+    <route id="camel-copy-file-route">
+        <description>&#xd;
+			Read file and copy to destination&#xd;
+		</description>
+        <from id="_from1" uri="file:c:/temp/">
+            <description>Source location</description>
+        </from>
+        <split id="_split1" streaming="true">
+            <xpath>VIOLATION</xpath>
+            <marshal id="_marshal1">
+                <xmljson forceTopLevelObject="true"
+                    removeNamespacePrefixes="true" skipNamespaces="true"
+                    skipWhitespace="true" trimSpaces="true"/>
+            </marshal>
+            <to id="_to1" uri="file:C:/temp/destination/"/>
+        </split>
+    </route>
+</routes>
